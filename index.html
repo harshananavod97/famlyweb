@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Family Driver - Your Trusted Family Driver Service</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-orange: #FF8C00;
+      --primary-yellow: #FFB800;
+      --light-orange: #FFF3E0;
+      --gradient-main: linear-gradient(135deg, #FF8C00 0%, #FFB800 50%, #FFD700 100%);
+      --gradient-hero: linear-gradient(135deg, #FFB347 0%, #FF8C00 40%, #FFD700 100%);
+      --gradient-footer: linear-gradient(135deg, #FF8C00 0%, #FFB800 100%);
+      --bg-light: #FFF8F0;
+      --text-dark: #2D2D2D;
+      --text-muted: #666;
+      --card-shadow: 0 4px 15px rgba(255,140,0,0.12);
+      --card-hover-shadow: 0 8px 30px rgba(255,140,0,0.2);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: var(--text-dark);
+      background: var(--bg-light);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      background: #fff;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+      padding: 0.6rem 0;
+      z-index: 1050;
+    }
+
+    .navbar-brand {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: var(--primary-orange) !important;
+    }
+
+    .navbar-brand span {
+      color: var(--primary-yellow);
+      position: relative;
+    }
+
+    .navbar-brand span::after {
+      content: '♥';
+      font-size: 0.5em;
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      color: #FF6B6B;
+    }
+
+    .nav-link {
+      font-weight: 600;
+      color: var(--text-dark) !important;
+      padding: 0.5rem 1rem !important;
+      transition: color 0.3s;
+      font-size: 0.95rem;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--primary-orange) !important;
+    }
+
+    .btn-download-app {
+      background: var(--gradient-main);
+      color: #fff !important;
+      border: none;
+      border-radius: 25px;
+      padding: 0.5rem 1.5rem !important;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .btn-download-app:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(255,140,0,0.4);
+      color: #fff !important;
+    }
+
+    /* ===== PAGE SECTIONS ===== */
+    .page-section {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== HERO SECTIONS ===== */
+    .hero-section {
+      background: var(--gradient-hero);
+      border-radius: 0 0 30px 30px;
+      padding: 3rem 2rem;
+      position: relative;
+      overflow: hidden;
+      min-height: 320px;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 500px;
+      height: 500px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+    }
+
+    .hero-section h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .hero-section p {
+      color: rgba(255,255,255,0.9);
+      font-size: 1rem;
+      max-width: 500px;
+    }
+
+    .hero-section .btn-learn {
+      background: #fff;
+      color: var(--primary-orange);
+      border: none;
+      border-radius: 25px;
+      padding: 0.6rem 2rem;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+
+    .hero-section .btn-learn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+
+    .hero-illustration {
+      max-height: 280px;
+      object-fit: contain;
+    }
+
+    /* ===== SECTION TITLES ===== */
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--text-dark);
+    }
+
+    /* ===== FEATURE CARDS ===== */
+    .feature-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 1.8rem 1.2rem;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      height: 100%;
+      border: 1px solid rgba(255,140,0,0.08);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-hover-shadow);
+    }
+
+    .feature-card .icon-circle {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      background: var(--light-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.8rem;
+      color: var(--primary-orange);
+    }
+
+    .feature-card h5 {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+
+    /* ===== PROMO BANNER ===== */
+    .promo-banner {
+      background: var(--gradient-hero);
+      border-radius: 20px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    .promo-banner::after {
+      content: '';
+      position: absolute;
+      right: -30px;
+      bottom: -30px;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+
+    .promo-banner h3 {
+      font-weight: 800;
+      font-size: 1.5rem;
+    }
+
+    .promo-banner p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    .promo-banner .btn-book {
+      background: #fff;
+      color: var(--primary-orange);
+      border: none;
+      border-radius: 25px;
+      padding: 0.5rem 2rem;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+
+    .promo-banner .btn-book:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    /* ===== WHY CHOOSE US ===== */
+    .why-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      height: 100%;
+      border: 1px solid rgba(255,140,0,0.06);
+    }
+
+    .why-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--card-hover-shadow);
+    }
+
+    .why-card .icon-box {
+      min-width: 55px;
+      height: 55px;
+      border-radius: 15px;
+      background: var(--light-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--primary-orange);
+    }
+
+    .why-card h6 {
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+    }
+
+    .why-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+
+    /* ===== SERVICE CARDS ===== */
+    .service-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s;
+      height: 100%;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-hover-shadow);
+      border-color: var(--primary-orange);
+    }
+
+    .service-card .service-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--light-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.8rem;
+      font-size: 1.6rem;
+    }
+
+    .service-card h6 {
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .service-card .service-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card .badge-count {
+      display: inline-block;
+      background: var(--gradient-main);
+      color: #fff;
+      border-radius: 15px;
+      padding: 0.2rem 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* Service card color variants */
+    .service-card.blue { border-left: 4px solid #4A90D9; }
+    .service-card.blue .service-icon { background: #E8F0FE; color: #4A90D9; }
+    .service-card.green { border-left: 4px solid #4CAF50; }
+    .service-card.green .service-icon { background: #E8F5E9; color: #4CAF50; }
+    .service-card.pink { border-left: 4px solid #E91E63; }
+    .service-card.pink .service-icon { background: #FCE4EC; color: #E91E63; }
+    .service-card.purple { border-left: 4px solid #9C27B0; }
+    .service-card.purple .service-icon { background: #F3E5F5; color: #9C27B0; }
+
+    /* ===== SAFETY PAGE ===== */
+    .safety-pillar {
+      background: var(--gradient-hero);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: #fff;
+      height: 100%;
+      transition: transform 0.3s;
+    }
+
+    .safety-pillar:hover {
+      transform: translateY(-5px);
+    }
+
+    .safety-pillar .pillar-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 2rem;
+    }
+
+    .safety-pillar h5 {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .safety-pillar p {
+      font-size: 0.88rem;
+      opacity: 0.9;
+      margin-bottom: 0;
+    }
+
+    .protocol-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.6rem 0;
+    }
+
+    .protocol-item .check-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #E8F5E9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4CAF50;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .protocol-item span {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    /* ===== FAQ PAGE ===== */
+    .faq-category {
+      background: var(--gradient-hero);
+      border-radius: 20px;
+      padding: 1.5rem;
+      text-align: center;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .faq-category .cat-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .faq-category h5 {
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+
+    .accordion-item {
+      border: 1px solid rgba(255,140,0,0.15) !important;
+      border-radius: 12px !important;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+    }
+
+    .accordion-button {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      background: #fff;
+      padding: 1rem 1.2rem;
+    }
+
+    .accordion-button:not(.collapsed) {
+      background: var(--light-orange);
+      color: var(--primary-orange);
+      box-shadow: none;
+    }
+
+    .accordion-button:focus {
+      box-shadow: 0 0 0 0.15rem rgba(255,140,0,0.25);
+    }
+
+    .accordion-button::after {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23FF8C00'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    }
+
+    .accordion-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ===== CONTACT PAGE ===== */
+    .contact-info-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 1.5rem;
+      box-shadow: var(--card-shadow);
+      height: 100%;
+      text-align: center;
+    }
+
+    .contact-info-card .contact-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: var(--light-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.8rem;
+      font-size: 1.5rem;
+      color: var(--primary-orange);
+    }
+
+    .contact-info-card h6 {
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .contact-info-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    .contact-form {
+      background: #fff;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    .contact-form .form-control,
+    .contact-form .form-select {
+      border: 1.5px solid #eee;
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      transition: border-color 0.3s;
+    }
+
+    .contact-form .form-control:focus,
+    .contact-form .form-select:focus {
+      border-color: var(--primary-orange);
+      box-shadow: 0 0 0 0.15rem rgba(255,140,0,0.15);
+    }
+
+    .btn-send {
+      background: var(--gradient-main);
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      padding: 0.7rem 2.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .btn-send:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(255,140,0,0.4);
+      color: #fff;
+    }
+
+    /* ===== APP PAGE ===== */
+    .app-store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #000;
+      color: #fff;
+      border-radius: 10px;
+      padding: 0.5rem 1.2rem;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: transform 0.3s;
+    }
+
+    .app-store-btn:hover {
+      transform: scale(1.05);
+      color: #fff;
+    }
+
+    .app-store-btn i {
+      font-size: 1.5rem;
+    }
+
+    .app-feature-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s;
+      height: 100%;
+    }
+
+    .app-feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--card-hover-shadow);
+    }
+
+    .app-feature-card .feat-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: var(--light-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.8rem;
+      font-size: 1.4rem;
+      color: var(--primary-orange);
+    }
+
+    .app-feature-card h6 {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .app-feature-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    .step-card {
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    .step-card .step-number {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--gradient-main);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.8rem;
+      font-weight: 800;
+      font-size: 1.2rem;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .step-card .step-icon {
+      font-size: 2.5rem;
+      color: var(--primary-orange);
+      margin-bottom: 0.5rem;
+    }
+
+    .step-card h6 {
+      font-weight: 700;
+    }
+
+    .step-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== TERMS PAGE ===== */
+    .terms-card {
+      border-radius: 18px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.3s;
+      height: 100%;
+    }
+
+    .terms-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .terms-card .terms-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .terms-card h6 {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .terms-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .terms-card .btn-learn-more {
+      background: var(--gradient-main);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 0.4rem 1.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .terms-card .btn-learn-more:hover {
+      transform: scale(1.05);
+      box-shadow: 0 3px 10px rgba(255,140,0,0.3);
+    }
+
+    .terms-card.tc-peach { background: #FFF0E5; }
+    .terms-card.tc-blue { background: #E8F4FD; }
+    .terms-card.tc-green { background: #E8F8E8; }
+    .terms-card.tc-lavender { background: #F0E8F8; }
+    .terms-card.tc-yellow { background: #FFF8E1; }
+    .terms-card.tc-pink { background: #FDE8EF; }
+
+    .download-terms {
+      background: var(--gradient-main);
+      border-radius: 20px;
+      padding: 1.5rem 2rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .download-terms .dl-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .download-terms h6 {
+      font-weight: 700;
+      margin-bottom: 0;
+      font-size: 1rem;
+    }
+
+    /* ===== MAP PLACEHOLDER ===== */
+    .map-placeholder {
+      background: #E8F0FE;
+      border-radius: 18px;
+      min-height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-placeholder .map-pin {
+      font-size: 3rem;
+      color: #E74C3C;
+    }
+
+    .map-placeholder .map-label {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      font-size: 0.85rem;
+    }
+
+    .map-placeholder .map-label strong {
+      font-weight: 700;
+    }
+
+    .map-placeholder .map-label small {
+      color: var(--text-muted);
+      display: block;
+      font-size: 0.75rem;
+    }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      background: var(--gradient-footer);
+      padding: 2rem 0 1rem;
+      color: #fff;
+      margin-top: 3rem;
+    }
+
+    .site-footer h6 {
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .site-footer p, .site-footer a {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .site-footer .footer-divider {
+      border-top: 1px solid rgba(255,255,255,0.25);
+      margin-top: 1.2rem;
+      padding-top: 1rem;
+    }
+
+    .site-footer .powered-by {
+      text-align: center;
+      font-size: 0.82rem;
+      opacity: 0.8;
+    }
+
+    .footer-store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(0,0,0,0.3);
+      color: #fff;
+      border-radius: 8px;
+      padding: 0.35rem 0.8rem;
+      text-decoration: none !important;
+      font-size: 0.75rem;
+      transition: background 0.3s;
+    }
+
+    .footer-store-btn:hover {
+      background: rgba(0,0,0,0.5);
+      color: #fff !important;
+    }
+
+    /* ===== PHONE MOCKUP ===== */
+    .phone-mockup {
+      width: 220px;
+      height: 420px;
+      background: #1a1a2e;
+      border-radius: 35px;
+      padding: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .phone-mockup::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 22px;
+      background: #1a1a2e;
+      border-radius: 0 0 15px 15px;
+      z-index: 2;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-hero);
+      border-radius: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      padding: 2rem 1rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .phone-screen i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .phone-screen h6 {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .phone-screen p {
+      font-size: 0.7rem;
+      opacity: 0.9;
+    }
+
+    /* ===== ILLUSTRATION PLACEHOLDERS ===== */
+    .hero-illust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .illust-group {
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-end;
+    }
+
+    .illust-person {
+      width: 60px;
+      height: 80px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 30px 30px 0 0;
+      position: relative;
+    }
+
+    .illust-person::before {
+      content: '';
+      width: 30px;
+      height: 30px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .illust-car {
+      width: 120px;
+      height: 50px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 10px 10px 5px 5px;
+      position: relative;
+      margin-left: 1rem;
+    }
+
+    .illust-car::before {
+      content: '';
+      width: 80px;
+      height: 30px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px 10px 0 0;
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 991.98px) {
+      .hero-section {
+        text-align: center;
+        padding: 2rem 1.5rem;
+      }
+
+      .hero-section h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero-section p {
+        margin: 0 auto;
+      }
+
+      .hero-illust {
+        margin-top: 1.5rem;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .hero-section h1 {
+        font-size: 1.5rem;
+      }
+
+      .section-title {
+        font-size: 1.4rem;
+      }
+
+      .phone-mockup {
+        width: 180px;
+        height: 340px;
+      }
+
+      .navbar-brand {
+        font-size: 1.4rem;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .hero-section {
+        padding: 1.5rem 1rem;
+        border-radius: 0 0 20px 20px;
+      }
+
+      .promo-banner {
+        text-align: center;
+      }
+
+      .contact-form {
+        padding: 1.2rem;
+      }
+    }
+
+    /* Utility */
+    .mt-section { margin-top: 3rem; }
+    .mb-section { margin-bottom: 3rem; }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#" onclick="showPage('home')">
+      Fam<span>i</span>ly
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <li class="nav-item">
+          <a class="nav-link active" href="#" data-page="services" onclick="showPage('services')">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-page="home" onclick="showPage('home')">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-page="safety" onclick="showPage('safety')">Safety</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-page="faq" onclick="showPage('faq')">FAQ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-page="contact" onclick="showPage('contact')">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" data-page="terms" onclick="showPage('terms')">Terms</a>
+        </li>
+        <li class="nav-item ms-lg-2">
+          <a class="nav-link btn-download-app" href="#" onclick="showPage('app')">
+            <i class="bi bi-download me-1"></i> Download App
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== HOME / ABOUT PAGE ==================== -->
+<section id="page-home" class="page-section active">
+  <!-- Hero -->
+  <div class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h1>Our Story:<br>Driven by Care &amp; Trust.</h1>
+          <p class="mt-3">Founded with a mission to provide safe, reliable, and family-friendly transport solutions for everyone. We believe in connecting families with trusted professionals.</p>
+          <button class="btn btn-learn mt-3">Learn More</button>
+        </div>
+        <div class="col-lg-6 hero-illust d-none d-lg-flex justify-content-center">
+          <div class="illust-group">
+            <div class="illust-person"></div>
+            <div class="illust-person" style="height:90px;"></div>
+            <div class="illust-person" style="height:70px;width:50px;"></div>
+            <div class="illust-car"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mission / Vision / Values -->
+  <div class="container mt-section">
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="icon-circle"><i class="bi bi-compass"></i></div>
+          <h5>Our Mission</h5>
+          <p>To be the most trusted family mobility partner, ensuring every journey is safe and enjoyable.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="icon-circle"><i class="bi bi-eye"></i></div>
+          <h5>Our Vision</h5>
+          <p>A world where every family travels with peace of mind and comfort.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="icon-circle"><i class="bi bi-heart"></i></div>
+          <h5>Our Values</h5>
+          <p>Safety, Integrity, Reliability, and Customer-Centricity define everything we do.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grietal Function / Service Eunoit -->
+  <div class="container mt-4">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="feature-card">
+          <div class="icon-circle"><i class="bi bi-geo-alt"></i></div>
+          <h5>Grietal Function</h5>
+          <p>Ensuring the van to where is to custodity, past working with undurmlereality iterations and neavity.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="feature-card">
+          <div class="icon-circle"><i class="bi bi-people"></i></div>
+          <h5>Service Eunoit</h5>
+          <p>Family drivers for every learning travel stop with your cnmr mailr pro chip and timetable is tracking.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summer Sale Banner -->
+  <div class="container mt-section">
+    <div class="promo-banner">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <h3><i class="bi bi-sun me-2"></i>Summer Travel Sale!</h3>
+          <p>Get 20% Off All Outstation Trips.</p>
+        </div>
+        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+          <button class="btn btn-book">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why Choose Us -->
+  <div class="container mt-section mb-section">
+    <h2 class="section-title">Why Choose Us?</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="why-card">
+          <div class="icon-box"><i class="bi bi-person-badge"></i></div>
+          <div>
+            <h6>Vetted Drivers</h6>
+            <p>To be the most trusted family mobility partner, ensuring every journey is safe and enjoyable.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="why-card">
+          <div class="icon-box"><i class="bi bi-headset"></i></div>
+          <div>
+            <h6>24/7 Support</h6>
+            <p>A world where every family travels with peace of mind and comfort.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="why-card">
+          <div class="icon-box"><i class="bi bi-geo-alt"></i></div>
+          <div>
+            <h6>Real-time Tracking</h6>
+            <p>Real-time tracking center promotion for control and running information.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="why-card">
+          <div class="icon-box"><i class="bi bi-currency-dollar"></i></div>
+          <div>
+            <h6>Affordable Pricing</h6>
+            <p>Affordable pricing with no hidden charges, delivered safely and transparently.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SERVICES PAGE ==================== -->
+<section id="page-services" class="page-section">
+  <!-- Hero -->
+  <div class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <h1>Good Day!<br>Let's get you moving.</h1>
+          <p class="mt-3">Your Trusted Family Driver Service.</p>
+          <div class="d-flex gap-2 mt-3 flex-wrap justify-content-center justify-content-lg-start">
+            <a href="#" class="app-store-btn"><i class="bi bi-google-play"></i> <div><small>GET IT ON</small><br><strong>Google Play</strong></div></a>
+            <a href="#" class="app-store-btn"><i class="bi bi-apple"></i> <div><small>Download on the</small><br><strong>App Store</strong></div></a>
+          </div>
+        </div>
+        <div class="col-lg-5 hero-illust d-none d-lg-flex">
+          <div class="illust-group">
+            <div class="illust-person" style="width:50px;height:65px;"></div>
+            <div class="illust-person" style="height:85px;"></div>
+            <div class="illust-person" style="width:40px;height:55px;"></div>
+            <div class="illust-car"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Our Services -->
+  <div class="container mt-section">
+    <h2 class="section-title">Our Services</h2>
+    <div class="row g-3">
+      <div class="col-6 col-md-4">
+        <div class="service-card">
+          <div class="service-icon"><i class="bi bi-car-front"></i></div>
+          <h6>Quick Trip</h6>
+          <p class="service-desc">Short rides within city</p>
+          <span class="badge-count">3 services</span>
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="service-card">
+          <div class="service-icon" style="background:#FFF3E0;color:#FF8C00;"><i class="bi bi-shield-check"></i></div>
+          <h6>Drunk &amp; Drive</h6>
+          <p class="service-desc">Safe ride home after drinking</p>
+          <span class="badge-count">2 services</span>
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="service-card">
+          <div class="service-icon" style="background:#E8F5E9;color:#4CAF50;"><i class="bi bi-signpost-2"></i></div>
+          <h6>Outstation Travel</h6>
+          <p class="service-desc">Intercity journeys</p>
+          <span class="badge-count">4 services</span>
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="service-card">
+          <div class="service-icon" style="background:#E3F2FD;color:#2196F3;"><i class="bi bi-map"></i></div>
+          <h6>Outstation Travel</h6>
+          <p class="service-desc">Intercity journeys</p>
+          <span class="badge-count">4 services</span>
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="service-card">
+          <div class="service-icon" style="background:#FFF9C4;color:#F9A825;"><i class="bi bi-battery-charging"></i></div>
+          <h6>Battery Jump Start</h6>
+          <p class="service-desc">Emergency car start</p>
+          <span class="badge-count">1 service</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summer Sale Banner -->
+  <div class="container mt-section">
+    <div class="promo-banner">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <h3><i class="bi bi-sun me-2"></i>Summer Travel Sale!</h3>
+          <p>Get 20% Off All Outstation Trips.</p>
+        </div>
+        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+          <button class="btn btn-book">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- More Services -->
+  <div class="container mt-section mb-section">
+    <div class="row g-3">
+      <div class="col-6 col-md-4">
+        <div class="service-card blue">
+          <div class="service-icon" style="background:#E8F0FE;color:#4A90D9;"><i class="bi bi-emoji-smile"></i></div>
+          <h6>Child Care</h6>
+          <p class="service-desc">Safe rides for kids</p>
+          <span class="badge-count">2 services</span>
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="service-card green">
+          <div class="service-icon" style="background:#E3F2FD;color:#1565C0;"><i class="bi bi-airplane"></i></div>
+          <h6>Airport Trip</h6>
+          <p class="service-desc">Book airport rides</p>
+          <span class="badge-count">2 services</span>
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="service-card pink">
+          <div class="service-icon" style="background:#FCE4EC;color:#E91E63;"><i class="bi bi-person-vcard"></i></div>
+          <h6>VIP Driver</h6>
+          <p class="service-desc">Luxury chauffeur service</p>
+          <span class="badge-count">1 service</span>
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="service-card purple">
+          <div class="service-icon" style="background:#E8F5E9;color:#4CAF50;"><i class="bi bi-person-hearts"></i></div>
+          <h6>Parent Care</h6>
+          <p class="service-desc">Reliable transport for parents</p>
+          <span class="badge-count">3 services</span>
+        </div>
+      </div>
+      <div class="col-6 col-md-4">
+        <div class="service-card">
+          <div class="service-icon" style="background:#FFF3E0;color:#FF8C00;"><i class="bi bi-bag"></i></div>
+          <h6>Shopping Fever</h6>
+          <p class="service-desc">Dedicated driver for shopping</p>
+          <span class="badge-count">2 services</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SAFETY PAGE ==================== -->
+<section id="page-safety" class="page-section">
+  <!-- Hero -->
+  <div class="hero-section">
+    <div class="container text-center text-lg-start">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <h1>Your Safety is Our<br>Top Priority.</h1>
+          <p class="mt-3">We go the extra mile to ensure every journey is secure and worry-free.</p>
+        </div>
+        <div class="col-lg-5 d-none d-lg-flex justify-content-center">
+          <div style="width:100px;height:100px;background:rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <i class="bi bi-shield-lock" style="font-size:3rem;color:rgba(255,255,255,0.8);"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Safety Pillars -->
+  <div class="container mt-section">
+    <h2 class="section-title">Our Core Safety Pillars</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="safety-pillar">
+          <div class="pillar-icon"><i class="bi bi-person-check"></i></div>
+          <h5>Rigorous Driver Vetting</h5>
+          <p>Multi-stage background checks, driving history review, and personal interviews.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="safety-pillar">
+          <div class="pillar-icon"><i class="bi bi-pin-map"></i></div>
+          <h5>Real-time Ride Monitoring</h5>
+          <p>24/7 tracking of every trip by our dedicated safety team.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="safety-pillar">
+          <div class="pillar-icon"><i class="bi bi-exclamation-triangle"></i></div>
+          <h5>In-Ride Safety Features</h5>
+          <p>In-app emergency button, ride sharing, and driver-partner alerts.</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="safety-pillar">
+          <div class="pillar-icon"><i class="bi bi-lock"></i></div>
+          <h5>Data Privacy &amp; Security</h5>
+          <p>Your personal and trip data is encrypted and protected at all times.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comprehensive Safety Protocols -->
+  <div class="container mt-section mb-section">
+    <h2 class="section-title">Our Comprehensive Safety Protocols</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="protocol-item">
+          <div class="check-icon"><i class="bi bi-check-lg"></i></div>
+          <span>Criminal Record Checks</span>
+        </div>
+        <div class="protocol-item">
+          <div class="check-icon"><i class="bi bi-check-lg"></i></div>
+          <span>Vehicle Safety Inspections</span>
+        </div>
+        <div class="protocol-item">
+          <div class="check-icon"><i class="bi bi-check-lg"></i></div>
+          <span>Driver Training &amp; Education</span>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="protocol-item">
+          <div class="check-icon"><i class="bi bi-check-lg"></i></div>
+          <span>Emergency Response Team</span>
+        </div>
+        <div class="protocol-item">
+          <div class="check-icon"><i class="bi bi-check-lg"></i></div>
+          <span>Secure Payment Gateway</span>
+        </div>
+        <div class="protocol-item">
+          <div class="check-icon"><i class="bi bi-check-lg"></i></div>
+          <span>Two-Factor Authentication for Accounts</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAQ PAGE ==================== -->
+<section id="page-faq" class="page-section">
+  <!-- Hero -->
+  <div class="hero-section">
+    <div class="container">
+      <h1>Got Questions?<br>We've Got Answers!</h1>
+      <p class="mt-3">Our creative categories</p>
+      <div class="input-group mt-3" style="max-width:400px;">
+        <input type="text" class="form-control" placeholder="Search for answers..." style="border-radius:25px 0 0 25px;border:none;padding:0.7rem 1.2rem;">
+        <button class="btn btn-light" style="border-radius:0 25px 25px 0;border:none;"><i class="bi bi-search"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-section">
+    <h2 class="section-title">FAQ</h2>
+
+    <!-- Booking Basics & Ride Safety -->
+    <div class="row g-3 mb-4">
+      <div class="col-md-6">
+        <div class="faq-category">
+          <div class="cat-icon"><i class="bi bi-calendar-check"></i></div>
+          <h5>Booking Basics</h5>
+        </div>
+        <div class="accordion" id="bookingFaq">
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bk1">How do I book a ride?</button></h2>
+            <div id="bk1" class="accordion-collapse collapse show" data-bs-parent="#bookingFaq">
+              <div class="accordion-body">Simply open the Family Driver app, enter your pickup and drop-off location, select your preferred vehicle type, and confirm your booking. You'll be matched with a vetted driver in minutes.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bk2">How do I choose a ride?</button></h2>
+            <div id="bk2" class="accordion-collapse collapse" data-bs-parent="#bookingFaq">
+              <div class="accordion-body">Browse through our service categories like Quick Trip, Outstation Travel, or VIP Driver. Select the one that fits your needs best.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bk3">How do I report now?</button></h2>
+            <div id="bk3" class="accordion-collapse collapse" data-bs-parent="#bookingFaq">
+              <div class="accordion-body">Use the in-app report button or contact our 24/7 customer support team through the app or by calling our hotline.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bk4">Whose rides are covered?</button></h2>
+            <div id="bk4" class="accordion-collapse collapse" data-bs-parent="#bookingFaq">
+              <div class="accordion-body">All rides booked through the Family Driver app are covered by our comprehensive insurance and safety protocols.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="faq-category">
+          <div class="cat-icon"><i class="bi bi-shield-check"></i></div>
+          <h5>Ride &amp; Safety</h5>
+        </div>
+        <div class="accordion" id="safetyFaq">
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#sf1">Is my ride tracked?</button></h2>
+            <div id="sf1" class="accordion-collapse collapse show" data-bs-parent="#safetyFaq">
+              <div class="accordion-body">Yes! Every ride is tracked in real-time using GPS. You can share your ride details with family members for added peace of mind.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sf2">Is the entire ride safe?</button></h2>
+            <div id="sf2" class="accordion-collapse collapse" data-bs-parent="#safetyFaq">
+              <div class="accordion-body">Absolutely. Our drivers undergo rigorous background checks, vehicles are inspected regularly, and our safety team monitors all rides 24/7.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sf3">What is the connection status?</button></h2>
+            <div id="sf3" class="accordion-collapse collapse" data-bs-parent="#safetyFaq">
+              <div class="accordion-body">The app shows real-time connection status between you and your driver. If connectivity drops, our team is automatically alerted.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sf4">How do I lock on force?</button></h2>
+            <div id="sf4" class="accordion-collapse collapse" data-bs-parent="#safetyFaq">
+              <div class="accordion-body">The app includes a safety lock feature. In an emergency, press and hold the SOS button for 3 seconds to alert our emergency response team.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payments & Troubleshooting -->
+    <div class="row g-3 mb-section">
+      <div class="col-md-6">
+        <div class="faq-category" style="background:linear-gradient(135deg,#4CAF50,#81C784);">
+          <div class="cat-icon"><i class="bi bi-cash-stack"></i></div>
+          <h5>Payments &amp; Perks</h5>
+        </div>
+        <div class="accordion" id="paymentFaq">
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#py1">What payment methods are accepted?</button></h2>
+            <div id="py1" class="accordion-collapse collapse show" data-bs-parent="#paymentFaq">
+              <div class="accordion-body">We accept all major credit/debit cards, digital wallets, UPI payments, net banking, and cash. You can manage your payment methods in the app settings.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#py2">How do I change my ride payment?</button></h2>
+            <div id="py2" class="accordion-collapse collapse" data-bs-parent="#paymentFaq">
+              <div class="accordion-body">Go to your booking details and tap on "Payment Method" to switch between available payment options before the ride ends.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#py3">What is the Friday payment?</button></h2>
+            <div id="py3" class="accordion-collapse collapse" data-bs-parent="#paymentFaq">
+              <div class="accordion-body">Friday Payment is our weekly payment cycle for drivers. All pending payments are processed every Friday for completed rides.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="faq-category" style="background:linear-gradient(135deg,#607D8B,#90A4AE);">
+          <div class="cat-icon"><i class="bi bi-wrench"></i></div>
+          <h5>Troubleshooting &amp; More</h5>
+        </div>
+        <div class="accordion" id="troubleFaq">
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tr1">How to troubleshoot?</button></h2>
+            <div id="tr1" class="accordion-collapse collapse show" data-bs-parent="#troubleFaq">
+              <div class="accordion-body">Try restarting the app, checking your internet connection, and ensuring location services are enabled. If issues persist, contact our 24/7 support team.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tr2">What are the common problems?</button></h2>
+            <div id="tr2" class="accordion-collapse collapse" data-bs-parent="#troubleFaq">
+              <div class="accordion-body">Common issues include GPS accuracy, payment processing delays, and app loading. Most can be resolved by updating the app to the latest version.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tr3">What is troubleshooting &amp; more?</button></h2>
+            <div id="tr3" class="accordion-collapse collapse" data-bs-parent="#troubleFaq">
+              <div class="accordion-body">This section covers all technical support topics including app issues, account management, and general queries beyond our standard FAQ categories.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CONTACT PAGE ==================== -->
+<section id="page-contact" class="page-section">
+  <!-- Hero -->
+  <div class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <h1>Get in Touch:<br>We're Here to Help.</h1>
+          <p class="mt-3">Have questions or need assistance? Reach out to our friendly team.</p>
+        </div>
+        <div class="col-lg-5 d-none d-lg-flex justify-content-center">
+          <div style="width:100px;height:100px;background:rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <i class="bi bi-chat-dots" style="font-size:3rem;color:rgba(255,255,255,0.8);"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Info Cards -->
+  <div class="container mt-section">
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="contact-info-card">
+          <div class="contact-icon"><i class="bi bi-telephone"></i></div>
+          <h6>Contact Info</h6>
+          <p><i class="bi bi-telephone me-1"></i> +91 123 456 7890</p>
+          <p><i class="bi bi-envelope me-1"></i> contactinfo@gmail.com</p>
+          <p><i class="bi bi-geo-alt me-1"></i> 123 Family Lane, City, Country</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-info-card">
+          <div class="contact-icon"><i class="bi bi-headset"></i></div>
+          <h6>Customer Support</h6>
+          <p>For existing bookings or app issues. Available 24/7.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-info-card">
+          <div class="contact-icon"><i class="bi bi-briefcase"></i></div>
+          <h6>Business Inquiries</h6>
+          <p>For partnerships and corporate solutions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map + Contact Form -->
+  <div class="container mt-section mb-section">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="map-placeholder">
+          <div class="map-label">
+            <strong>Office Location</strong>
+            <small>123 Family Lane, City, Country</small>
+          </div>
+          <div class="map-pin"><i class="bi bi-geo-alt-fill"></i></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="contact-form">
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Name">
+          </div>
+          <div class="mb-3">
+            <input type="email" class="form-control" placeholder="Email">
+          </div>
+          <div class="mb-3">
+            <select class="form-select">
+              <option>Subject</option>
+              <option>Booking Issue</option>
+              <option>Payment Query</option>
+              <option>Partnership</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <textarea class="form-control" rows="4" placeholder="Message"></textarea>
+          </div>
+          <button class="btn btn-send w-100">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why Choose Us (repeated on contact) -->
+  <div class="container mb-section">
+    <h2 class="section-title">Why Choose Us?</h2>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="why-card">
+          <div class="icon-box"><i class="bi bi-person-badge"></i></div>
+          <div>
+            <h6>Vetted Drivers</h6>
+            <p>To be the most trusted family mobility partner, ensuring every journey is safe.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="why-card">
+          <div class="icon-box"><i class="bi bi-headset"></i></div>
+          <div>
+            <h6>24/7 Support</h6>
+            <p>A world where every family travels with peace of mind and comfort.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="why-card">
+          <div class="icon-box"><i class="bi bi-geo-alt"></i></div>
+          <div>
+            <h6>Real-time Tracking</h6>
+            <p>Real-time tracking center for control and running information.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="why-card">
+          <div class="icon-box"><i class="bi bi-currency-dollar"></i></div>
+          <div>
+            <h6>Affordable Pricing</h6>
+            <p>Affordable pricing with no hidden charges, delivered safely.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== APP PAGE ==================== -->
+<section id="page-app" class="page-section">
+  <!-- Hero -->
+  <div class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h1>Download the Family Driver App: Your Safe Journey Awaits.</h1>
+          <p class="mt-3">Experience seamless booking, real-time tracking, and secure payments on the go.</p>
+          <div class="d-flex gap-2 mt-3 flex-wrap justify-content-center justify-content-lg-start">
+            <a href="#" class="app-store-btn"><i class="bi bi-google-play"></i> <div><small>GET IT ON</small><br><strong>Google Play</strong></div></a>
+            <a href="#" class="app-store-btn"><i class="bi bi-apple"></i> <div><small>Download on the</small><br><strong>App Store</strong></div></a>
+          </div>
+        </div>
+        <div class="col-lg-6 d-none d-lg-flex justify-content-center mt-4 mt-lg-0">
+          <div class="phone-mockup">
+            <div class="phone-screen">
+              <i class="bi bi-car-front-fill"></i>
+              <h6>Family Driver</h6>
+              <p>Safe. Reliable. Family-First.</p>
+              <div class="mt-2" style="background:rgba(255,255,255,0.2);border-radius:10px;padding:0.5rem;width:100%;">
+                <small>Book a Ride</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key App Features -->
+  <div class="container mt-section">
+    <h2 class="section-title">Key App Features</h2>
+    <div class="row g-3">
+      <div class="col-6 col-md-3">
+        <div class="app-feature-card">
+          <div class="feat-icon"><i class="bi bi-geo-alt"></i></div>
+          <h6>Real-time Tracking</h6>
+          <p>Track your ride live with GPS accuracy.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="app-feature-card">
+          <div class="feat-icon"><i class="bi bi-shield-lock"></i></div>
+          <h6>Secure Payments</h6>
+          <p>Encrypted payment processing for safety.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="app-feature-card">
+          <div class="feat-icon"><i class="bi bi-calendar-check"></i></div>
+          <h6>Easy Booking</h6>
+          <p>Book your ride in just a few taps.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="app-feature-card">
+          <div class="feat-icon"><i class="bi bi-headset"></i></div>
+          <h6>24/7 Support</h6>
+          <p>Help is always just a tap away.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How It Works -->
+  <div class="container mt-section mb-section">
+    <h2 class="section-title">How It Works</h2>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-icon"><i class="bi bi-phone"></i></div>
+          <h6>Download &amp; Register</h6>
+          <p>Download the app and register your account.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-icon"><i class="bi bi-geo-alt"></i></div>
+          <h6>Book a Ride</h6>
+          <p>Book your ride with real-time tracking and location services.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-icon"><i class="bi bi-car-front"></i></div>
+          <h6>Enjoy Safe Travel</h6>
+          <p>Enjoy safe travel — family travels with peace and care.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TERMS PAGE ==================== -->
+<section id="page-terms" class="page-section">
+  <!-- Hero -->
+  <div class="hero-section">
+    <div class="container">
+      <h1>Terms &amp; Conditions: Our<br>Mutual Understanding.</h1>
+      <p class="mt-3">Read through the guidelines that ensure a fair, safe, and transparent experience for everyone.</p>
+    </div>
+  </div>
+
+  <!-- Terms Cards -->
+  <div class="container mt-section">
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="terms-card tc-peach">
+          <div class="terms-icon"><i class="bi bi-file-earmark-person"></i></div>
+          <h6>User Agreement &amp; Eligibility</h6>
+          <p>Outlining the rules for using our service and who can create an account.</p>
+          <button class="btn btn-learn-more">Learn More</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="terms-card tc-blue">
+          <div class="terms-icon"><i class="bi bi-credit-card"></i></div>
+          <h6>Booking, Fares &amp; Payment Policies</h6>
+          <p>Details on how to book, ride costs, and accepted payment methods.</p>
+          <button class="btn btn-learn-more">Learn More</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="terms-card tc-green">
+          <div class="terms-icon"><i class="bi bi-shield-check"></i></div>
+          <h6>Safety, Conduct &amp; User Responsibility</h6>
+          <p>Guidelines for ensuring a safe and respectful environment for everyone.</p>
+          <button class="btn btn-learn-more">Learn More</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="terms-card tc-lavender">
+          <div class="terms-icon"><i class="bi bi-lock"></i></div>
+          <h6>Data Privacy &amp; Information Security</h6>
+          <p>How we collect, use, and protect your personal and trip data.</p>
+          <button class="btn btn-learn-more">Learn More</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="terms-card tc-yellow">
+          <div class="terms-icon"><i class="bi bi-clock-history"></i></div>
+          <h6>Cancellation Policy &amp; Refunds</h6>
+          <p>Rules and procedures for cancelling rides and requesting refunds.</p>
+          <button class="btn btn-learn-more">Learn More</button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="terms-card tc-pink">
+          <div class="terms-icon"><i class="bi bi-hammer"></i></div>
+          <h6>Limitation of Liability &amp; Dispute Resolution</h6>
+          <p>Our legal responsibilities and the process for resolving any issues.</p>
+          <button class="btn btn-learn-more">Learn More</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Download Terms PDF -->
+  <div class="container mt-section mb-4">
+    <div class="download-terms">
+      <div class="dl-icon"><i class="bi bi-download"></i></div>
+      <div>
+        <h6>Download the Full, Detailed Terms &amp; Conditions Document (PDF)</h6>
+      </div>
+    </div>
+    <p class="text-center mt-3 text-muted" style="font-size:0.9rem;">Last Updated: <u>October 26, 2023</u></p>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <h6>Contact Info</h6>
+        <p><i class="bi bi-telephone me-2"></i>+91 123 456 7890</p>
+        <p><i class="bi bi-envelope me-2"></i>contactinfo@gmail.com</p>
+      </div>
+      <div class="col-md-4">
+        <h6>Social Media</h6>
+        <p><i class="bi bi-facebook me-2"></i><a href="#">@FamilyDriver</a></p>
+        <p><i class="bi bi-instagram me-2"></i><a href="#">FamilyDriver</a></p>
+      </div>
+      <div class="col-md-4">
+        <h6>App Store</h6>
+        <div class="d-flex gap-2 flex-wrap">
+          <a href="#" class="footer-store-btn"><i class="bi bi-google-play me-1"></i> Google Play</a>
+          <a href="#" class="footer-store-btn"><i class="bi bi-apple me-1"></i> App Store</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-divider">
+      <p class="powered-by">Powered by FamilyDriver.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function showPage(pageId) {
+    // Hide all pages
+    document.querySelectorAll('.page-section').forEach(page => {
+      page.classList.remove('active');
+    });
+
+    // Show selected page
+    const target = document.getElementById('page-' + pageId);
+    if (target) {
+      target.classList.add('active');
+    }
+
+    // Update nav active state
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.remove('active');
+      if (link.dataset.page === pageId) {
+        link.classList.add('active');
+      }
+    });
+
+    // Close mobile nav
+    const navCollapse = document.getElementById('mainNav');
+    const bsCollapse = bootstrap.Collapse.getInstance(navCollapse);
+    if (bsCollapse) {
+      bsCollapse.hide();
+    }
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
